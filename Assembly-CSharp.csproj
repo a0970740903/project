@@ -60,9 +60,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\loadxml.cs" />
     <Compile Include="Assets\mainmenumanager.cs" />
     <Compile Include="Assets\optomm.cs" />
     <Compile Include="Assets\Quit.cs" />
+    <None Include="Assets\Languages\ChineseTrad\ButtonText.xml" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/lpin0/Desktop/專題/project/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

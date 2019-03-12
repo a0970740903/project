@@ -12,11 +12,16 @@ public class mainmenumanager : MonoBehaviour
     public GameObject quitButton_click;
     public GameObject returnButton_click;
 
+    string strbtn;//按鈕內文字
+
+
     // Start is called before the first frame update
     void Start()
     {
         //GetComponent<Button>().onClick.AddListener(tooptions);
         //GetComponent<Button>().onClick.AddListener();
+        strbtn = "START";
+        startButton_click.GetComponentInChildren<Text>().text = strbtn;//用來指定按鈕內顯示的文字
     }
 
     // Update is called once per frame
