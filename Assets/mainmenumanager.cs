@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
+using System.Xml.Linq;
 
 public class mainmenumanager : MonoBehaviour
 {
@@ -11,30 +13,34 @@ public class mainmenumanager : MonoBehaviour
     public GameObject optionsButton_click;
     public GameObject quitButton_click;
     public GameObject returnButton_click;
+    public GameObject langSwitch;
 
-    string strbtn;//按鈕內文字
+    string startbtn;//按鈕內文字
+    string optionsbtn;
+    string quitbtn;
+    string returnbtn;
+
+    public string lngpath;//語言文件的路徑
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //GetComponent<Button>().onClick.AddListener(tooptions);
-        //GetComponent<Button>().onClick.AddListener();
-        strbtn = "START";
-        startButton_click.GetComponentInChildren<Text>().text = strbtn;//用來指定按鈕內顯示的文字
+        Loadxml();
+        startButton_click.GetComponentInChildren<Text>().text = startbtn;//設定按鈕初始的文字
+        optionsButton_click.GetComponentInChildren<Text>().text = optionsbtn;
+        quitButton_click.GetComponentInChildren<Text>().text = quitbtn;
+        returnButton_click.GetComponentInChildren<Text>().text = returnbtn;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Loadxml();
+        Switchlng();
     }
 
-    //public void tooptions()
-    //{
-    //Debug.Log("load to options");
-    //SceneManager.LoadScene("options", LoadSceneMode.Additive);
-    //}
 
     //進入設定頁面
     public void Setting()
@@ -60,4 +66,36 @@ public class mainmenumanager : MonoBehaviour
         optionsButton_click.SetActive(true);
         returnButton_click.SetActive(false);
     }
+
+    public void buttontext()
+    {
+        startButton_click.GetComponentInChildren<Text>().text = startbtn;//用來指定按鈕內顯示的文字
+
+    }
+
+    //讀取XML文件的程式
+    public void Loadxml()
+    {
+        lngpath = "Assets/Languages/ChineseTrad/ButtonText.xml";
+        var btntext = XDocument.Load(lngpath).Root;
+        startbtn = btntext.Element("startbtn").Value;
+        optionsbtn = btntext.Element("optionsbtn").Value;
+        returnbtn = btntext.Element("returnbtn").Value;
+        quitbtn = btntext.Element("quitbtn").Value;
+    }
+
+    public void Switchlng()
+    {
+        if (langSwitch.GetComponent<lansect>().ddvar == 0)
+        {
+            //Debug.Log("繁體中文");
+            lngpath = "Assets/Languages/ChineseTrad/ButtonText.xml";
+        }
+        if (langSwitch.GetComponent<lansect>().ddvar == 1)
+        {
+            //Debug.Log("English");
+            lngpath = "Assets/Languages/English/ButtonText.xml";
+        }
+    }
+
 }
